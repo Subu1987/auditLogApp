@@ -1,0 +1,2 @@
+ID,username,passwordHash,email,lastLogin
+user1,subrato,hashed123,subrato@example.com,2024-06-01T10:00:00Z
