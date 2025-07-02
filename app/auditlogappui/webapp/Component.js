@@ -3,7 +3,7 @@ sap.ui.define(
     function (Component) {
         "use strict";
 
-        return Component.extend("com.infocus.auditlogappui.Component", {
+        return Component.extend("auditlogappui.Component", {
             metadata: {
                 manifest: "json"
             }

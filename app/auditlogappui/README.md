@@ -1,7 +1,7 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Mon Jun 30 2025 07:22:47 GMT+0000 (Coordinated Universal Time)|
+|**Generation Date and Time**<br>Wed Jul 02 2025 07:14:01 GMT+0000 (Coordinated Universal Time)|
 |**App Generator**<br>SAP Fiori Application Generator|
 |**App Generator Version**<br>1.18.1|
 |**Generation Platform**<br>SAP Business Application Studio|
@@ -9,8 +9,8 @@
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/odata/v4/audit/|
 |**Module Name**<br>auditlogappui|
-|**Application Title**<br>Audit Log Report Application|
-|**Namespace**<br>com.infocus|
+|**Application Title**<br>Audit Log Application|
+|**Namespace**<br>|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.136.2|
 |**Enable Code Assist Libraries**<br>False|

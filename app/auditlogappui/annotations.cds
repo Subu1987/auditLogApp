@@ -215,21 +215,6 @@ annotate service.AuditLogsBackup with @(
             Value : connectionId,
         },
     ],
-    UI.SelectionPresentationVariant #tableView : {
-        $Type : 'UI.SelectionPresentationVariantType',
-        PresentationVariant : {
-            $Type : 'UI.PresentationVariantType',
-            Visualizations : [
-                '@UI.LineItem',
-            ],
-        },
-        SelectionVariant : {
-            $Type : 'UI.SelectionVariantType',
-            SelectOptions : [
-            ],
-        },
-        Text : 'Table View',
-    },
 );
 
 annotate service.AuditLogsBackup with {

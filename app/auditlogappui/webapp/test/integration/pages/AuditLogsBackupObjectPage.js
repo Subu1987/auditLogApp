@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
     return new ObjectPage(
         {
-            appId: 'com.infocus.auditlogappui',
+            appId: 'auditlogappui',
             componentId: 'AuditLogsBackupObjectPage',
             contextPath: '/AuditLogsBackup'
         },

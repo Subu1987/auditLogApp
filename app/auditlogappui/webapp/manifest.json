@@ -1,7 +1,7 @@
 {
   "_version": "1.65.0",
   "sap.app": {
-    "id": "com.infocus.auditlogappui",
+    "id": "auditlogappui",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.18.1",
-      "toolsId": "6da042d2-8946-4aa3-856c-22693a4d3338"
+      "toolsId": "c60beed2-4d36-4ba0-a74f-7d460902ce7b"
     },
     "dataSources": {
       "mainService": {
@@ -43,7 +43,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": false,
+    "flexEnabled": true,
     "dependencies": {
       "minUI5Version": "1.136.2",
       "libs": {
@@ -60,7 +60,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "com.infocus.auditlogappui.i18n.i18n"
+          "bundleName": "auditlogappui.i18n.i18n"
         }
       },
       "": {
@@ -110,6 +110,9 @@
                   }
                 }
               },
+              "controller": {
+                "name": "auditlogappui.ext.controller.UploadFiles"
+              },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
@@ -117,7 +120,7 @@
                   },
                   "actions": {
                     "uploadFiles": {
-                      "press": "com.infocus.auditlogappui.ext.controller.UploadFiles.onUploadPress",
+                      "press": "auditlogappui.ext.controller.UploadFiles.onUploadPress",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": false,
@@ -125,8 +128,7 @@
                     }
                   }
                 }
-              },
-              "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView"
+              }
             }
           }
         },

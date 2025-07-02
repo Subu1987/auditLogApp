@@ -7,17 +7,20 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^8",
-    "express": "^4"
+    "csv-parse": "^5.6.0",
+    "express": "^4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@cap-js/cds-types": "^0.10.0"
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^1"
   },
   "scripts": {
     "start": "cds-serve",
     "watch-auditlogappui": "cds watch --open auditlogappui/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
+    "app/auditlogappui",
     "app/auditlogappui"
   ]
 }

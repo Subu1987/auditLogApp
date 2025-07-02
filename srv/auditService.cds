@@ -12,7 +12,8 @@ service AuditService {
   entity AuditLogsBackup as projection on auditLogSpace.AuditLogsBackup;
 
   // 🔧 Custom action: Upload a file
-  action uploadAuditLog(file : LargeBinary) returns {
+  @path: 'upload'
+  action uploadAuditLog(fileName: String, file : LargeBinary) returns {
     status  : String;
     records : Integer;
   };
