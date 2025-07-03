@@ -3,62 +3,85 @@ sap.ui.define([
   "sap/m/VBox",
   "sap/m/Button",
   "sap/m/MessageToast",
+  "sap/m/MessageBox",
   "sap/ui/unified/FileUploader"
-], function (Dialog, VBox, Button, MessageToast, FileUploader) {
+], function (Dialog, VBox, Button, MessageToast, MessageBox, FileUploader) {
   "use strict";
 
   return {
     _uploadDialog: null,
     _selectedFile: null,
+    _fileBase64: null,
 
     onUploadPress: function () {
       const that = this;
 
       function onFileChange(oEvent) {
         const oFile = oEvent.getParameter("files")[0];
-        if (oFile) {
-          that._selectedFile = oFile;
-          MessageToast.show("📁 File selected: " + oFile.name);
-        }
-      }
+        if (!oFile) return;
 
-      async function onConfirmUpload() {
-        if (!that._selectedFile) {
-          MessageToast.show("Please select a file.");
+        // 🚫 Optional: Limit file size to 5MB
+        if (oFile.size > 5 * 1024 * 1024) {
+          MessageBox.warning("⚠️ File too large. Please upload files under 5MB.");
           return;
         }
 
-        const file = that._selectedFile;
         const reader = new FileReader();
 
-        reader.onload = async function (e) {
-          const base64Data = e.target.result.split(",")[1];
-
+        reader.onload = function (e) {
           try {
-            const response = await fetch("/odata/v4/audit/uploadAuditLog", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                fileName: file.name,
-                file: base64Data
-              })
-            });
+            const base64String = e.target.result.split(",")[1]; // strip data URL prefix
+            that._fileBase64 = base64String;
+            that._selectedFile = oFile;
 
-            const result = await response.json();
-
-            if (response.ok) {
-              MessageToast.show(result.status || "✅ Upload complete");
-            } else {
-              MessageToast.show("❌ Upload failed: " + result.error?.message);
-            }
+            MessageToast.show("📁 File selected: " + oFile.name);
           } catch (err) {
-            MessageToast.show("❌ Error: " + err.message);
+            MessageBox.error("❌ Error reading file: " + err.message);
           }
         };
 
-        reader.readAsDataURL(file); // Converts file to base64
+        reader.readAsDataURL(oFile); // ✅ Safe way to get base64
+      }
+
+      async function onConfirmUpload() {
+        if (!that._selectedFile || !that._fileBase64) {
+          MessageToast.show("⚠️ Please select a file first.");
+          return;
+        }
+
+        try {
+          const response = await fetch("/odata/v4/audit/uploadAuditLog", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              fileName: that._selectedFile.name,
+              file: that._fileBase64
+            })
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            MessageToast.show(result.status || "✅ Upload complete");
+
+            // // Get the Fiori Elements List Report view and refresh it
+            // const oTable = this.base.getView().byId("fe::table::AuditLogsBackup");
+            // if (oTable && oTable.getBinding("items")) {
+            //   oTable.getBinding("items").refresh();
+            // } else {
+            //   // fallback to model refresh
+            //   this.base.getView().getModel().refresh(true);
+            // }
+
+          } else {
+            MessageBox.error("❌ Upload failed: " + result.error?.message || "Unknown error.");
+          }
+        } catch (err) {
+          MessageBox.error("❌ Upload error: " + err.message);
+        }
+
         that._uploadDialog.close();
       }
 

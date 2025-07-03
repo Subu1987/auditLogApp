@@ -1,3 +1,0 @@
-ID,fileName,uploadedBy_ID,recordCount,status,errorMessage
-upload1,log_may.csv,user1,3,SUCCESS,
-upload2,log_june.csv,user1,2,SUCCESS,
