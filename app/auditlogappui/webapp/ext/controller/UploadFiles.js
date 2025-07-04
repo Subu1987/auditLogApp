@@ -66,6 +66,9 @@ sap.ui.define([
           if (response.ok) {
             MessageToast.show(result.status || "✅ Upload complete");
 
+            // console.log("Refreshing table for AuditLogsBackup");
+            // that.extensionAPI.refresh("AuditLogsBackup");
+
             // // Get the Fiori Elements List Report view and refresh it
             // const oTable = this.base.getView().byId("fe::table::AuditLogsBackup");
             // if (oTable && oTable.getBinding("items")) {
